@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Project Background</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Data Preparation" href="data_prep.html" />
+  <link rel="prev" title="CSE 490g1 Final" href="index.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">CSE490g1 Final</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#cse-490g1-final">Contents:</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Project Background</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#background" class="reference internal">Background</a></li>
+                
+                  <li class="toctree-l2"><a href="#previous-work" class="reference internal">Previous Work</a></li>
+                
+                  <li class="toctree-l2"><a href="#proposal" class="reference internal">Proposal</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="data_prep.html" class="reference internal ">Data Preparation</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>Project Background</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← CSE 490g1 Final</a>
+  </li>
+  <li class="next">
+    <a href="data_prep.html"
+       title="next chapter">Data Preparation →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <div class="section" id="project-background">
+<h1>Project Background<a class="headerlink" href="#project-background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>Deep learning has been finding applications in areas far broader than just computer vision
+or natural language processing. One of these domains is chemistry. For example:
+can deep learning be used to find a synthesize molecule with a desired property,
+like corrosion resistance? Before that, can deep learning even predict these
+properties when only given a molecule topology? The current method for determining
+chemical properties (without doing a real world experiment) typically involves
+density functional theory (DFT), a very expensive computational method that
+simulates molecules as a quantum system - i.e., highly nonlinear. But, if
+atomistic structures can be processed to predict a given property, the result
+could be backpropagated to find a molecule with a desired quantity.</p>
+<p>These ideas draw some parallel to NLP. Organic molecules have structure and
+follow a sort of ‘grammar’ in how atoms can stably bond, much like sentence
+structure and grammar. In prediction of properties like sentiment, a discrete
+sentence is brought to a continuous latent space, which is then used to predict
+the property. It’s no surprise then that NLP techniques likes transformers are
+commonly applied.</p>
+</div>
+<div class="section" id="previous-work">
+<h2>Previous Work<a class="headerlink" href="#previous-work" title="Permalink to this headline">¶</a></h2>
+<p>This project builds on the work of Dollar, <em>et. al.</em>, (REFERENCE) which defined a network
+architecture for creating this latent embedding of molecules using a transformer-based
+variational autoencoder. Molecules are represented as
+<a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a>
+strings, a canonical sequence that encodes the bonds and atoms of a molecule. This
+model is trained by bringing the strings into a continuous latent space using an
+encoder, then reconstructed to the same discrete SMILES string using a decoder.</p>
+<div class="figure align-default" id="id1">
+<img alt="_images/SMILES.webp" src="_images/SMILES.webp" />
+<p class="caption"><span class="caption-text">Example of the structure and corresponding SMILES string of Ciprofloxacin</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="proposal">
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
+<p>The continuous latent space from the model developed by Dollar, <em>et. al.</em>, will
+be used as the input for a separate property prediction network. The original
+model was trained on SMILES strings from the ZINC (REFERENCE) dataset, but lacks
+corresponding property data, so these will need to be calculated first. Then a
+fully connected network will be trained, with latent representation as the input
+and a desired property as the output. This network maybe entirely separate (e.g.,
+using a pretrained model) or trained at the same time as the VAE to optimize the
+latent space for property prediction.</p>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← CSE 490g1 Final</a>
+  </li>
+  <li class="next">
+    <a href="data_prep.html"
+       title="next chapter">Data Preparation →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Isaiah Lemmon.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>
