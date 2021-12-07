@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-      <title>CSE 490g1 Final</title>
+      <title>Training With a Frozen VAE</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -22,13 +22,13 @@
     
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="Project Background" href="problem.html" /> 
+  <link rel="prev" title="Initial Training" href="initial_training.html" /> 
   </head>
 
   <body>
     <div id="app">
     <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="#" class="home-link">
+  <router-link to="index.html" class="home-link">
     
       <span class="site-name">CSE490g1 Final</span>
     
@@ -69,9 +69,9 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="#cse-490g1-final">Contents:</a></span>
+        <span class="caption-text"><a href="index.html#cse-490g1-final">Contents:</a></span>
       </p>
-      <ul class="">
+      <ul class="current">
         
           <li class="toctree-l1 ">
             
@@ -100,11 +100,17 @@
           </li>
 
         
-          <li class="toctree-l1 ">
+          <li class="toctree-l1 current">
             
-              <a href="frozen.html" class="reference internal ">Training With a Frozen VAE</a>
+              <a href="#" class="reference internal current">Training With a Frozen VAE</a>
             
 
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#training-with-a-frozen-vae" class="reference internal">Training With a Frozen VAE</a></li>
+                
+              </ul>
             
           </li>
 
@@ -119,16 +125,16 @@
           <div class="body-header" role="navigation" aria-label="navigation">
   
   <ul class="breadcrumbs">
-    <li><a href="#">Docs</a> &raquo;</li>
+    <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>CSE 490g1 Final</li>
+    <li>Training With a Frozen VAE</li>
   </ul>
   
 
   <ul class="page-nav">
-  <li class="next">
-    <a href="problem.html"
-       title="next chapter">Project Background →</a>
+  <li class="prev">
+    <a href="initial_training.html"
+       title="previous chapter">← Initial Training</a>
   </li>
 </ul>
   
@@ -136,47 +142,17 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="cse-490g1-final">
-<h1>CSE 490g1 Final<a class="headerlink" href="#cse-490g1-final" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="problem.html">Project Background</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#previous-work">Previous Work</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#proposal">Proposal</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_prep.html">Data Preparation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_prep.html#generating-3d-structures">Generating 3D Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_prep.html#from-3d-structures-to-properties">From 3D Structures to Properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_prep.html#recombining-split-files">Recombining Split Files</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="initial_training.html">Initial Training</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="initial_training.html#architecture">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="initial_training.html#hydrogen-acceptors">Hydrogen Acceptors</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="initial_training.html#results">Results</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="initial_training.html#xtb-lumo">XTB LUMO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="initial_training.html#id1">Results</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="frozen.html">Training With a Frozen VAE</a></li>
-</ul>
-</div>
+  <section id="training-with-a-frozen-vae">
+<h1>Training With a Frozen VAE<a class="headerlink" href="#training-with-a-frozen-vae" title="Permalink to this headline">¶</a></h1>
 </section>
 
 
           </div>
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
-  <li class="next">
-    <a href="problem.html"
-       title="next chapter">Project Background →</a>
+  <li class="prev">
+    <a href="initial_training.html"
+       title="previous chapter">← Initial Training</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.

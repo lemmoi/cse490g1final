@@ -7,9 +7,11 @@ CSE 490g1 Final
 ===============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    problem
    data_prep
+   initial_training
+   frozen
 

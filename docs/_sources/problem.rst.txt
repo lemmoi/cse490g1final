@@ -38,6 +38,11 @@ encoder, then reconstructed to the same discrete SMILES string using a decoder.
 
     Example of the structure and corresponding SMILES string of Ciprofloxacin
 
+.. figure:: images/vae.gif
+
+    Basic VAE architecture that encodes a string to a continuous, low dimensional latent space,
+    then reconstructs the string from it with a decoder.
+
 Proposal
 --------
 The continuous latent space from the model developed by Dollar, *et. al.*, will

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Initial Training</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Training With a Frozen VAE" href="frozen.html" />
+  <link rel="prev" title="Data Preparation" href="data_prep.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">CSE490g1 Final</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#cse-490g1-final">Contents:</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="problem.html" class="reference internal ">Project Background</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="data_prep.html" class="reference internal ">Data Preparation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Initial Training</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#architecture" class="reference internal">Architecture</a></li>
+                
+                  <li class="toctree-l2"><a href="#hydrogen-acceptors" class="reference internal">Hydrogen Acceptors</a></li>
+                
+                  <li class="toctree-l2"><a href="#xtb-lumo" class="reference internal">XTB LUMO</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="frozen.html" class="reference internal ">Training With a Frozen VAE</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>Initial Training</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="data_prep.html"
+       title="previous chapter">← Data Preparation</a>
+  </li>
+  <li class="next">
+    <a href="frozen.html"
+       title="next chapter">Training With a Frozen VAE →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="initial-training">
+<h1>Initial Training<a class="headerlink" href="#initial-training" title="Permalink to this headline">¶</a></h1>
+<p>The first attempts at property prediction were made by training the VAE and
+prediction network from scratch simultaneously.</p>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>The TransVAE package implements multiple transformer based variational autoencoders.
+We chose to use the 4x-128 architecture, which refers to four 128 dim attention heads,
+with four layers of self-attention and three layers of source-attention.
+Training 100 epochs takes approximately one day on a RTX 2080Ti.</p>
+<p>The TransVAE package also provides a method to add this property prediction network
+from the command line. For all of the below, two fully connected layers of size (128x200),
+(200x1) with LRU activation were attached to the 128 dim latent space for property
+prediction.</p>
+</section>
+<section id="hydrogen-acceptors">
+<h2>Hydrogen Acceptors<a class="headerlink" href="#hydrogen-acceptors" title="Permalink to this headline">¶</a></h2>
+<p>The first property that we attempted to predict was the number of hydrogen acceptors.
+We considered this fairly easy property because it does not require a true property
+calculation and can just be determined by the number of N, O, and F’s present in the
+molecule. These should be embedded in the latent space, as it is directly required
+for reconstruction, so it should be fairly easy for a prediction network to extract
+them if reconstruction is also good.</p>
+<p>Since this property is <span class="math notranslate nohighlight">\(\in \mathbb{N}\)</span>, it was normalized to <span class="math notranslate nohighlight">\(\in [0, 1]\)</span>
+using min-max normalization on the training data. The same normalization as the training
+was applied to the validation and testing data. A plot of the unnormalized distribution
+for the training data can be seen below</p>
+<p>INSERT IMAGE</p>
+<section id="results">
+<h3>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h3>
+<p>For final evaluation, the outputs had the normalization transformation undone, then
+rounded to the nearest integer. After 100 epochs, this achieved 99.9% accuracy on
+the training data and 99.8% accuracy on the test data, while still maintaining a reconstruction
+loss comparable to the base model without a predictor.</p>
+<p>INSERT TRAINING IMAGE</p>
+<p>As stated above, this was expected because we knew this information must’ve been present in the latent space
+for accurate reconstruction. The broader question was if the latent space could encode properties
+that had non-linear relationships.</p>
+</section>
+</section>
+<section id="xtb-lumo">
+<h2>XTB LUMO<a class="headerlink" href="#xtb-lumo" title="Permalink to this headline">¶</a></h2>
+<p>The next property we tried to predict was Lowest Unoccupied Molecular Orbital (LUMO) energy level,
+as calculated with XTB. This is <span class="math notranslate nohighlight">\(\in \mathbb{R}\)</span>, but clustered, as shown below. We applied
+standard normalization on the training dataset, and the same transformation to the validation and
+test datasets.</p>
+<p>INSERT IMAGE</p>
+<p>Surprisingly, this model performed very poorly. Not only was the property prediction loss
+high, but the reconstruction loss was now much higher than the models without a prediction
+network.</p>
+<section id="id1">
+<h3>Results<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>INSERT IMAGE</p>
+<p>It seems as though the prediction network took too much of the available ‘power’
+of the model. The encoder/decoder were unable to accurately reconstruct the molecule,
+meaning that an meaningful representation was never able to be embedded in the
+bottleneck. This inspired the next idea.</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="data_prep.html"
+       title="previous chapter">← Data Preparation</a>
+  </li>
+  <li class="next">
+    <a href="frozen.html"
+       title="next chapter">Training With a Frozen VAE →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2021, Isaiah Lemmon.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

@@ -2,7 +2,8 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
       <title>Data Preparation</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -21,6 +22,7 @@
     
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Initial Training" href="initial_training.html" />
   <link rel="prev" title="Project Background" href="problem.html" /> 
   </head>
 
@@ -91,7 +93,29 @@
                 
                   <li class="toctree-l2"><a href="#generating-3d-structures" class="reference internal">Generating 3D Structures</a></li>
                 
+                  <li class="toctree-l2"><a href="#from-3d-structures-to-properties" class="reference internal">From 3D Structures to Properties</a></li>
+                
+                  <li class="toctree-l2"><a href="#recombining-split-files" class="reference internal">Recombining Split Files</a></li>
+                
               </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="initial_training.html" class="reference internal ">Initial Training</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="frozen.html" class="reference internal ">Training With a Frozen VAE</a>
+            
+
             
           </li>
 
@@ -117,22 +141,83 @@
     <a href="problem.html"
        title="previous chapter">← Project Background</a>
   </li>
+  <li class="next">
+    <a href="initial_training.html"
+       title="next chapter">Initial Training →</a>
+  </li>
 </ul>
   
 </div>
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="data-preparation">
+  <section id="data-preparation">
 <h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="generating-3d-structures">
+<section id="generating-3d-structures">
 <h2>Generating 3D Structures<a class="headerlink" href="#generating-3d-structures" title="Permalink to this headline">¶</a></h2>
 <p>SMILES strings only encode the topology of a molecule, i.e. its atoms and the
 bonds between them. There is no 3D information about the direction or distance
 between atoms, which is required as a starting point for property prediction using
-DFT.</p>
+DFT. Therefore, the first step is generating these 3D structures using a classical
+force field. Force fields parameterize the forces between atoms and are used in
+classical molecular dynamics simulations. Generating a 3D structure is essentially
+running a simulation until the forces reach a potential energy minima.</p>
+<p>INSERT IMAGE OF SMILES -&gt; 2D -&gt; 3D</p>
+<p>This step was performed using <a class="reference external" href="https://openbabel.org/wiki/Main_Page">openbabel</a>,
+a Python package for computational chemistry. Specifically, the
+<a class="reference external" href="https://ambermd.org/antechamber/gaff.html">General Amber Force Field</a> (GAFF) was
+used, as it is well suited for the small drug-like molecules that ZINC is comprised of.</p>
+<p>However, openbabel cannot take advantage of multiple cores, so the input was
+split into individual files with 80,000 molecules each. These were processed in
+parallel, each taking ~3 hours.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>split
+</pre></div>
 </div>
-</div>
+<p>Out of the 1.6 million molecules, 4 were unable to successfully converge to 3D structures.
+They are shown in INSERT FILE and were removed from the training set.</p>
+<p><strong>CPU hours for this step: ~70</strong></p>
+</section>
+<section id="from-3d-structures-to-properties">
+<h2>From 3D Structures to Properties<a class="headerlink" href="#from-3d-structures-to-properties" title="Permalink to this headline">¶</a></h2>
+<p>Once 3D structures were generated, the Python package
+<a class="reference external" href="https://kjelljorner.github.io/morfeus/">morfeus (molecular features for machine learning)</a>
+was used to calculate various properties. This package largely serves as wrapper around
+other property calculation packages to provide a uniform interface. This project will
+only attempt to predict a few of the properties calculated, but more were calculated with
+the foresight that they may be used by other researchers in the future.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Electronic properties (ionization energy, etc.)</dt><dd><p>Morfeus calls <a class="reference external" href="https://xtb-docs.readthedocs.io/en/latest/contents.html">XTB</a>, an implementation of
+the semiempirical quantum-mechanical method <a class="reference external" href="https://doi.org/10.1021/acs.jctc.8b01176">eXtended Tight Binding</a>.
+This method maintains accuracy for small molecules, but is orders of magnitude faster than true DFT.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dispersion Properties</dt><dd><p>The <a class="reference external" href="https://github.com/dftd4/dftd4">DFT-D4 package</a> was used to calculate dispersion properties, based on
+the <a class="reference external" href="https://doi.org/10.1063/1.5090222">D4 model</a>, which achieves better accuracies than the previous D3 model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Solvent accessible surface area (SASA)</dt><dd><p>Morfeus uses the <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.540160303">double cubic lattice method</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Each of the 3D structure files containing 80,000 molecules was processed in parallel. Unlike openbabel,
+these programs can take advantage of multiple cores to speed up execution. Each file was assigned
+8 cores and 16 GB of RAM on the <a class="reference external" href="https://uwrc.github.io/systems">University of Washington HYAK cluster</a>
+and took approximately 10 hours to complete. The code to do this processing can be found at INSERT LINK.
+The result was a CSV file of properties for each split file.</p>
+<p><strong>CPU hours for this step: ~2,000</strong></p>
+</section>
+<section id="recombining-split-files">
+<h2>Recombining Split Files<a class="headerlink" href="#recombining-split-files" title="Permalink to this headline">¶</a></h2>
+<p>Finally, the individual CSV files were rejoined back together as a csv file for each of the training,
+development, and test sets. All files are available at INSERT LINK</p>
+</section>
+</section>
 
 
           </div>
@@ -142,10 +227,14 @@ DFT.</p>
     <a href="problem.html"
        title="previous chapter">← Project Background</a>
   </li>
+  <li class="next">
+    <a href="initial_training.html"
+       title="next chapter">Initial Training →</a>
+  </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>
