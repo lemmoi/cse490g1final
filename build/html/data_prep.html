@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>CSE 490g1 Final</title>
+      <title>Data Preparation</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -20,14 +20,13 @@
       <script src="_static/theme.js" defer></script>
     
   <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="Project Background" href="problem.html" /> 
+  <link rel="search" title="Search" href="search.html" /> 
   </head>
 
   <body>
     <div id="app">
     <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="#" class="home-link">
+  <router-link to="index.html" class="home-link">
     
       <span class="site-name">CSE490g1 Final</span>
     
@@ -68,22 +67,13 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="#cse-490g1-final">Contents:</a></span>
+        <span class="caption-text"><a href="index.html#cse-490g1-final">Contents:</a></span>
       </p>
       <ul class="">
         
           <li class="toctree-l1 ">
             
               <a href="problem.html" class="reference internal ">Project Background</a>
-            
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 ">
-            
-              <a href="data_prep.html" class="reference internal ">Data Preparation</a>
             
 
             
@@ -100,39 +90,27 @@
           <div class="body-header" role="navigation" aria-label="navigation">
   
   <ul class="breadcrumbs">
-    <li><a href="#">Docs</a> &raquo;</li>
+    <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>CSE 490g1 Final</li>
+    <li>Data Preparation</li>
   </ul>
   
 
   <ul class="page-nav">
-  <li class="next">
-    <a href="problem.html"
-       title="next chapter">Project Background →</a>
-  </li>
 </ul>
   
 </div>
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="cse-490g1-final">
-<h1>CSE 490g1 Final<a class="headerlink" href="#cse-490g1-final" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="problem.html">Project Background</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#previous-work">Previous Work</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html#proposal">Proposal</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_prep.html">Data Preparation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_prep.html#generating-3d-structures">Generating 3D Structures</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="data-preparation">
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generating-3d-structures">
+<h2>Generating 3D Structures<a class="headerlink" href="#generating-3d-structures" title="Permalink to this headline">¶</a></h2>
+<p>SMILES strings only encode the topology of a molecule, i.e. its atoms and the
+bonds between them. There is no 3D information about the direction or distance
+between atoms, which is required as a starting point for property prediction using
+DFT.</p>
 </div>
 </div>
 
@@ -140,10 +118,6 @@
           </div>
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
-  <li class="next">
-    <a href="problem.html"
-       title="next chapter">Project Background →</a>
-  </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
