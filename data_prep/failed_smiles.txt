@@ -1,0 +1,12 @@
+Smiles strings that failed to convert to a XYZ
+
+zinc_train
+----------
+In split 00:
+49542: CCC1(C(=O)c2ccccc2)C(C(=O)OC)=NC(=N)N=C1C(=O)OC
+49544: COC(=O)C1=NC(=N)N=C(C(=O)OC)C12C(=O)Cc1ccccc12
+
+In split 01:
+27605: Cc1cc(C(=C2C=CC(=N)C=C2)c2ccc(N)cc2)ccc1N
+34854: Cc1cc(C(=C2C=CC(=N)C=C2)c2ccc(N)c(C)c2)ccc1N
+

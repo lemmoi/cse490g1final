@@ -33,7 +33,9 @@ using min-max normalization on the training data. The same normalization as the 
 was applied to the validation and testing data. A plot of the unnormalized distribution
 for the training data can be seen below
 
-INSERT IMAGE
+.. figure:: images/hbond_dist.svg
+
+    caption
 
 Results
 ^^^^^^^
@@ -41,9 +43,13 @@ Results
 For final evaluation, the outputs had the normalization transformation undone, then
 rounded to the nearest integer. After 100 epochs, this achieved 99.9% accuracy on
 the training data and 99.8% accuracy on the test data, while still maintaining a reconstruction
-loss comparable to the base model without a predictor.
+loss comparable to the base model without a predictor. The training plots for
+the property prediction and the loss from the rest of the network (reconstruction,
+prediction, and KLD) are shown below.
 
-INSERT TRAINING IMAGE
+.. figure:: images/h_acc_training.svg
+
+    Loss
 
 As stated above, this was expected because we knew this information must've been present in the latent space
 for accurate reconstruction. The broader question was if the latent space could encode properties
@@ -53,20 +59,25 @@ XTB LUMO
 --------
 
 The next property we tried to predict was Lowest Unoccupied Molecular Orbital (LUMO) energy level,
-as calculated with XTB. This is :math:`\in \mathbb{R}`, but clustered, as shown below. We applied
-standard normalization on the training dataset, and the same transformation to the validation and
-test datasets.
+as calculated with XTB. This is :math:`\in \mathbb{R}` and roughly normal, but with some far
+outliers, as shown below. We applied standard normalization on the training dataset,
+and the same transformation to the validation and test datasets.
 
-INSERT IMAGE
+.. figure:: images/xtb_lumo_dist.svg
+
+    Loss
+
+Results
+^^^^^^^
 
 Surprisingly, this model performed very poorly. Not only was the property prediction loss
 high, but the reconstruction loss was now much higher than the models without a prediction
 network.
 
-Results
-^^^^^^^
 
-INSERT IMAGE
+.. figure:: images/xtb_lumo_training.svg
+
+    Loss
 
 It seems as though the prediction network took too much of the available 'power'
 of the model. The encoder/decoder were unable to accurately reconstruct the molecule,
