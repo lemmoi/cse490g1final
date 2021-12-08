@@ -24,9 +24,16 @@ parallel, each taking ~3 hours.
 
 .. code-block:: bash
 
-    split
+    # STEP 1: split the training file into smaller files, each with 80000 smiles
+    split -l 80000 -d zinc_train.txt zinc_train --additional-suffix=.smi
 
-Out of the 1.6 million molecules, 4 were unable to successfully converge to 3D structures.
+    # STEP 2: For each smiles file, convert to xyz using GAFF
+    for i in *.smi; do
+        root=${i%.*}
+        obabel -ismi "$i" -oxyz -O "${root}.xyz" --ff GAFF --gen3d &
+    done
+
+Out of the 1.9 million molecules, 4 were unable to successfully converge to 3D structures.
 They are shown in INSERT FILE and were removed from the training set.
 
 **CPU hours for this step: ~70**
@@ -64,5 +71,5 @@ The result was a CSV file of properties for each split file.
 Recombining Split Files
 -----------------------
 
-Finally, the individual CSV files were rejoined back together as a csv file for each of the training,
+Finally, the individual CSV files were rejoined back together INSERT LINK as a csv file for each of the training,
 development, and test sets. All files are available at INSERT LINK
