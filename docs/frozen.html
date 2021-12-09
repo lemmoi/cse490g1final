@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Training With a Frozen VAE</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,6 +13,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
       
       <!-- bundled in js (rollup iife) -->
@@ -108,7 +108,11 @@
             
               <ul>
                 
-                  <li class="toctree-l2"><a href="#training-with-a-frozen-vae" class="reference internal">Training With a Frozen VAE</a></li>
+                  <li class="toctree-l2"><a href="#solvent-accessible-surface-area-sasa" class="reference internal">Solvent Accessible Surface Area (SASA)</a></li>
+                
+                  <li class="toctree-l2"><a href="#d4-dispersion-p-int" class="reference internal">D4 Dispersion P_{int}</a></li>
+                
+                  <li class="toctree-l2"><a href="#xtb-lumo-revisited" class="reference internal">XTB LUMO (Revisited)</a></li>
                 
               </ul>
             
@@ -142,27 +146,48 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="training-with-a-frozen-vae">
+  <div class="section" id="training-with-a-frozen-vae">
 <h1>Training With a Frozen VAE<a class="headerlink" href="#training-with-a-frozen-vae" title="Permalink to this headline">¶</a></h1>
-<figure class="align-default" id="id1">
+<div class="section" id="solvent-accessible-surface-area-sasa">
+<h2>Solvent Accessible Surface Area (SASA)<a class="headerlink" href="#solvent-accessible-surface-area-sasa" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id1">
+<img alt="_images/sasa_area_dist.svg" src="_images/sasa_area_dist.svg" /><p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="_images/sasa_area.svg"><img alt="_images/sasa_area.svg" src="_images/sasa_area.svg" width="900" /></a>
-<figcaption>
-<p><span class="caption-text">Fig 1</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id2">
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="_images/sasa_area_pred.png"><img alt="_images/sasa_area_pred.png" src="_images/sasa_area_pred.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="d4-dispersion-p-int">
+<h2>D4 Dispersion <span class="math notranslate nohighlight">\(P_{int}\)</span><a class="headerlink" href="#d4-dispersion-p-int" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id4">
+<img alt="_images/d4_disp_pint_dist.svg" src="_images/d4_disp_pint_dist.svg" /><p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="_images/d4_disp.svg"><img alt="_images/d4_disp.svg" src="_images/d4_disp.svg" width="900" /></a>
-<figcaption>
-<p><span class="caption-text">Fig 1</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id3">
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="_images/d4_disp_pint_pred.png"><img alt="_images/d4_disp_pint_pred.png" src="_images/d4_disp_pint_pred.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="xtb-lumo-revisited">
+<h2>XTB LUMO (Revisited)<a class="headerlink" href="#xtb-lumo-revisited" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="_images/xtb_lumo.svg"><img alt="_images/xtb_lumo.svg" src="_images/xtb_lumo.svg" width="900" /></a>
-<figcaption>
-<p><span class="caption-text">Fig 1</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-</section>
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="_images/xtb_lumo_pred.png"><img alt="_images/xtb_lumo_pred.png" src="_images/xtb_lumo_pred.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Fig 1</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
 
 
           </div>
@@ -175,7 +200,7 @@
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>

@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Data Preparation</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -151,9 +150,9 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="data-preparation">
+  <div class="section" id="data-preparation">
 <h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
-<section id="generating-3d-structures">
+<div class="section" id="generating-3d-structures">
 <h2>Generating 3D Structures<a class="headerlink" href="#generating-3d-structures" title="Permalink to this headline">¶</a></h2>
 <p>SMILES strings only encode the topology of a molecule, i.e. its atoms and the
 bonds between them. There is no 3D information about the direction or distance
@@ -183,8 +182,8 @@ split -l <span class="m">80000</span> -d zinc_train.txt zinc_train --additional-
 <p>Out of the 1.9 million molecules, 4 were unable to successfully converge to 3D structures.
 They are shown in INSERT FILE and were removed from the training set.</p>
 <p><strong>CPU hours for this step: ~70</strong></p>
-</section>
-<section id="from-3d-structures-to-properties">
+</div>
+<div class="section" id="from-3d-structures-to-properties">
 <h2>From 3D Structures to Properties<a class="headerlink" href="#from-3d-structures-to-properties" title="Permalink to this headline">¶</a></h2>
 <p>Once 3D structures were generated, the Python package
 <a class="reference external" href="https://kjelljorner.github.io/morfeus/">morfeus (molecular features for machine learning)</a>
@@ -218,13 +217,13 @@ these programs can take advantage of multiple cores to speed up execution. Each 
 and took approximately 10 hours to complete. The code to do this processing can be found at INSERT LINK.
 The result was a CSV file of properties for each split file.</p>
 <p><strong>CPU hours for this step: ~2,000</strong></p>
-</section>
-<section id="recombining-split-files">
+</div>
+<div class="section" id="recombining-split-files">
 <h2>Recombining Split Files<a class="headerlink" href="#recombining-split-files" title="Permalink to this headline">¶</a></h2>
 <p>Finally, the individual CSV files were rejoined back together INSERT LINK as a csv file for each of the training,
 development, and test sets. All files are available at INSERT LINK</p>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -241,7 +240,7 @@ development, and test sets. All files are available at INSERT LINK</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>
