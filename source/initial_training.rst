@@ -58,6 +58,8 @@ that had non-linear relationships.
 XTB LUMO
 --------
 
+.. _xtb_lumo_dist:
+
 The next property we tried to predict was Lowest Unoccupied Molecular Orbital (LUMO) energy level,
 as calculated with XTB. This is :math:`\in \mathbb{R}` and roughly normal, but with some far
 outliers, as shown below. We applied standard normalization on the training dataset,
@@ -74,6 +76,7 @@ Surprisingly, this model performed very poorly. Not only was the property predic
 high, but the reconstruction loss was now much higher than the models without a prediction
 network.
 
+.. _xtb_lumo_prev:
 
 .. figure:: images/xtb_lumo_training.svg
 
