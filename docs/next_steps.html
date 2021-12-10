@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Index</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Next Steps</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -20,8 +20,9 @@
       <!-- <script src="_static/theme-vendors.js"></script> -->
       <script src="_static/theme.js" defer></script>
     
-  <link rel="index" title="Index" href="#" />
-  <link rel="search" title="Search" href="search.html" /> 
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="prev" title="Training With a Frozen VAE" href="frozen.html" /> 
   </head>
 
   <body>
@@ -70,7 +71,7 @@
       <p class="caption">
         <span class="caption-text"><a href="index.html#cse-490g1-final">Contents:</a></span>
       </p>
-      <ul class="">
+      <ul class="current">
         
           <li class="toctree-l1 ">
             
@@ -108,11 +109,17 @@
           </li>
 
         
-          <li class="toctree-l1 ">
+          <li class="toctree-l1 current">
             
-              <a href="next_steps.html" class="reference internal ">Next Steps</a>
+              <a href="#" class="reference internal current">Next Steps</a>
             
 
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#thanks" class="reference internal">Thanks!</a></li>
+                
+              </ul>
             
           </li>
 
@@ -129,28 +136,52 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>Index</li>
+    <li>Next Steps</li>
   </ul>
   
 
   <ul class="page-nav">
+  <li class="prev">
+    <a href="frozen.html"
+       title="previous chapter">← Training With a Frozen VAE</a>
+  </li>
 </ul>
   
 </div>
 <hr>
           <div class="content" role="main" v-pre>
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
+  <section id="next-steps">
+<h1>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h1>
+<p>We’ve showed latent space that was only trained on string reconstruction can be used to accurately
+predict simplistic properties of a molecule with a separate fully connected neural net. In addition,
+it performs marginally well on more complex properties that would normally be much more
+computational intensive. All of this on input vectors that have no context for this properties.</p>
+<p>We’d like to see the performance of these predictions if the latent space <em>did</em> have context
+of the molecular properties. However, we saw that training both the VAE and prediction greatly
+decreased the performance of both.</p>
+<p>In our next steps, we will try starting with a <em>pretrained VAE</em> model, then attach the prediction
+layer and try training both at the same time. Starting with a good embedding, we should be able
+to more easily fine tune the network to produce a latent space that is aware of the property
+we’re trying to predict. We may also need to adjust the learning rate of different sections,
+possibly decreasing the learning rate of the VAE as compared to the prediction network to make
+the embedding more stable.</p>
+<section id="thanks">
+<h2>Thanks!<a class="headerlink" href="#thanks" title="Permalink to this headline">¶</a></h2>
+<p>Thanks for reading my Deep Learning Final! I hope you thought it was interesting.
+Some of this may eventually be put into a paper, so thanks for suffering through the
+formal language as well.</p>
+</section>
+</section>
 
 
           </div>
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="frozen.html"
+       title="previous chapter">← Training With a Frozen VAE</a>
+  </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>

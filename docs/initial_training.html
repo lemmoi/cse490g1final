@@ -2,7 +2,8 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
       <title>Initial Training</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -120,6 +121,15 @@
           </li>
 
         
+          <li class="toctree-l1 ">
+            
+              <a href="next_steps.html" class="reference internal ">Next Steps</a>
+            
+
+            
+          </li>
+
+        
       </ul>
     </div>
   
@@ -151,11 +161,11 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="initial-training">
+  <section id="initial-training">
 <h1>Initial Training<a class="headerlink" href="#initial-training" title="Permalink to this headline">¶</a></h1>
 <p>The first attempts at property prediction were made by training the VAE and
 prediction network from scratch simultaneously.</p>
-<div class="section" id="architecture">
+<section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
 <p>The TransVAE package implements multiple transformer based variational autoencoders.
 We chose to use the 4x-128 architecture, which refers to four 128 dim attention heads,
@@ -165,8 +175,8 @@ Training 100 epochs takes approximately one day on a RTX 2080Ti.</p>
 from the command line. For all of the below, two fully connected layers of size (128x200),
 (200x1) with LRU activation were attached to the 128 dim latent space for property
 prediction.</p>
-</div>
-<div class="section" id="hydrogen-acceptors">
+</section>
+<section id="hydrogen-acceptors">
 <h2>Hydrogen Acceptors<a class="headerlink" href="#hydrogen-acceptors" title="Permalink to this headline">¶</a></h2>
 <p>The first property that we attempted to predict was the number of hydrogen acceptors.
 We considered this fairly easy property because it does not require a true property
@@ -178,10 +188,12 @@ them if reconstruction is also good.</p>
 using min-max normalization on the training data. The same normalization as the training
 was applied to the validation and testing data. A plot of the unnormalized distribution
 for the training data can be seen below</p>
-<div class="figure align-default" id="id2">
-<img alt="_images/hbond_dist.svg" src="_images/hbond_dist.svg" /><p class="caption"><span class="caption-text">caption</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="results">
+<figure class="align-default" id="id2">
+<img alt="_images/hbond_dist.svg" src="_images/hbond_dist.svg" /><figcaption>
+<p><span class="caption-text">caption</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="results">
 <h3>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h3>
 <p>For final evaluation, the outputs had the normalization transformation undone, then
 rounded to the nearest integer. After 100 epochs, this achieved 99.9% accuracy on
@@ -189,38 +201,44 @@ the training data and 99.8% accuracy on the test data, while still maintaining a
 loss comparable to the base model without a predictor. The training plots for
 the property prediction and the loss from the rest of the network (reconstruction,
 prediction, and KLD) are shown below.</p>
-<div class="figure align-default" id="id3">
-<img alt="_images/h_acc_training.svg" src="_images/h_acc_training.svg" /><p class="caption"><span class="caption-text">Loss</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figure class="align-default" id="id3">
+<img alt="_images/h_acc_training.svg" src="_images/h_acc_training.svg" /><figcaption>
+<p><span class="caption-text">Loss</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>As stated above, this was expected because we knew this information must’ve been present in the latent space
 for accurate reconstruction. The broader question was if the latent space could encode properties
 that had non-linear relationships.</p>
-</div>
-</div>
-<div class="section" id="xtb-lumo">
+</section>
+</section>
+<section id="xtb-lumo">
 <h2>XTB LUMO<a class="headerlink" href="#xtb-lumo" title="Permalink to this headline">¶</a></h2>
-<p>The next property we tried to predict was Lowest Unoccupied Molecular Orbital (LUMO) energy level,
+<p id="xtb-lumo-dist">The next property we tried to predict was Lowest Unoccupied Molecular Orbital (LUMO) energy level,
 as calculated with XTB. This is <span class="math notranslate nohighlight">\(\in \mathbb{R}\)</span> and roughly normal, but with some far
 outliers, as shown below. We applied standard normalization on the training dataset,
 and the same transformation to the validation and test datasets.</p>
-<div class="figure align-default" id="id4">
-<img alt="_images/xtb_lumo_dist.svg" src="_images/xtb_lumo_dist.svg" /><p class="caption"><span class="caption-text">Loss</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="id1">
+<figure class="align-default" id="id4">
+<img alt="_images/xtb_lumo_dist.svg" src="_images/xtb_lumo_dist.svg" /><figcaption>
+<p><span class="caption-text">Loss</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="id1">
 <h3>Results<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Surprisingly, this model performed very poorly. Not only was the property prediction loss
 high, but the reconstruction loss was now much higher than the models without a prediction
 network.</p>
-<div class="figure align-default" id="id5">
-<img alt="_images/xtb_lumo_training.svg" src="_images/xtb_lumo_training.svg" /><p class="caption"><span class="caption-text">Loss</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
+<figure class="align-default" id="id5">
+<span id="xtb-lumo-prev"></span><img alt="_images/xtb_lumo_training.svg" src="_images/xtb_lumo_training.svg" /><figcaption>
+<p><span class="caption-text">Loss</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>It seems as though the prediction network took too much of the available ‘power’
 of the model. The encoder/decoder were unable to accurately reconstruct the molecule,
 meaning that an meaningful representation was never able to be embedded in the
 bottleneck. This inspired the next idea.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>
@@ -237,7 +255,7 @@ bottleneck. This inspired the next idea.</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>
