@@ -9,7 +9,8 @@ reconstruction, it could potentially be enough to predict properties from
 directly.
 
 To do this, we extracted the latent space for the train and test sets from
-the 4x-128 model published here INSERT LINK. These fixed vectors were fed
+the 4x-128 model `published here. <https://github.com/oriondollar/TransVAE/blob/master/checkpoints/trans4x-128_zinc.ckpt>`_
+These fixed vectors were fed
 directly into the property prediction network, which allowed for much faster
 iteration of design, since the forward pass no longer needed to go through
 the encoder.
@@ -21,6 +22,10 @@ was performed for 70 epochs with a batch size of 128, the Adam optimizer with de
 parameters, a starting learning rate of 0.001, and Pytorch's dynamic learning rate
 scheduler `ReduceLROnPlateau <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html>`_
 based on the test set loss.
+
+.. figure:: images/frozen.png
+
+    Architecture for training property prediction with frozen latent spaces.
 
 For each below property, three data normalization schemes were trialed
 

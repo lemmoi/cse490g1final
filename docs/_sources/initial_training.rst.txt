@@ -18,6 +18,10 @@ from the command line. For all of the below, two fully connected layers of size 
 (200x1) with LRU activation were attached to the 128 dim latent space for property
 prediction.
 
+.. figure:: images/initial_training.png
+
+    Property prediction and VAE training at the same time.
+
 
 Hydrogen Acceptors
 ------------------

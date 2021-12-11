@@ -26,7 +26,7 @@ commonly applied.
 Previous Work
 -------------
 
-This project builds on the work of Dollar, *et. al.*, (REFERENCE) which defined a network
+This project builds on the work of Dollar, *et. al.*, [Dollar]_ which defined a network
 architecture for creating this latent embedding of molecules using a transformer-based
 variational autoencoder. Molecules are represented as
 `SMILES <https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system>`_
@@ -47,9 +47,13 @@ Proposal
 --------
 The continuous latent space from the model developed by Dollar, *et. al.*, will
 be used as the input for a separate property prediction network. The original
-model was trained on SMILES strings from the ZINC (REFERENCE) dataset, but lacks
+model was trained on SMILES strings from a modified version of the ZINC [ZINC]_ dataset, but lacks
 corresponding property data, so these will need to be calculated first. Then a
 fully connected network will be trained, with latent representation as the input
 and a desired property as the output. This network maybe entirely separate (e.g.,
 using a pretrained model) or trained at the same time as the VAE to optimize the
 latent space for property prediction.
+
+.. [Dollar] Dollar, O.; Joshi, N.; A. C. Beck, D.; Pfaendtner, J. Giving Attention to Generative VAE Models for De Novo Molecular Design, 2021. https://doi.org/10.26434/chemrxiv.13724629.v1.
+
+.. [ZINC] Irwin, J. J.; Shoichet, B. K. ZINC − A Free Database of Commercially Available Compounds for Virtual Screening. Journal of Chemical Information and Modeling, 2005, 45, 177–182. https://doi.org/10.1021/ci049714+.

@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Project Background</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -160,9 +159,9 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="project-background">
+  <div class="section" id="project-background">
 <h1>Project Background<a class="headerlink" href="#project-background" title="Permalink to this headline">¶</a></h1>
-<section id="background">
+<div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>Deep learning has been finding applications in areas far broader than just computer vision
 or natural language processing. One of these domains is chemistry. For example:
@@ -180,42 +179,46 @@ structure and grammar. In prediction of properties like sentiment, a discrete
 sentence is brought to a continuous latent space, which is then used to predict
 the property. It’s no surprise then that NLP techniques likes transformers are
 commonly applied.</p>
-</section>
-<section id="previous-work">
+</div>
+<div class="section" id="previous-work">
 <h2>Previous Work<a class="headerlink" href="#previous-work" title="Permalink to this headline">¶</a></h2>
-<p>This project builds on the work of Dollar, <em>et. al.</em>, (REFERENCE) which defined a network
+<p>This project builds on the work of Dollar, <em>et. al.</em>, <a class="reference internal" href="#dollar" id="id1"><span>[Dollar]</span></a> which defined a network
 architecture for creating this latent embedding of molecules using a transformer-based
 variational autoencoder. Molecules are represented as
 <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a>
 strings, a canonical sequence that encodes the bonds and atoms of a molecule. This
 model is trained by bringing the strings into a continuous latent space using an
 encoder, then reconstructed to the same discrete SMILES string using a decoder.</p>
-<figure class="align-default" id="id1">
+<div class="figure align-default" id="id3">
 <img alt="_images/SMILES.webp" src="_images/SMILES.webp" />
-<figcaption>
-<p><span class="caption-text">Example of the structure and corresponding SMILES string of Ciprofloxacin</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id2">
+<p class="caption"><span class="caption-text">Example of the structure and corresponding SMILES string of Ciprofloxacin</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id4">
 <img alt="_images/vae.gif" src="_images/vae.gif" />
-<figcaption>
-<p><span class="caption-text">Basic VAE architecture that encodes a string to a continuous, low dimensional latent space,
-then reconstructs the string from it with a decoder.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="proposal">
+<p class="caption"><span class="caption-text">Basic VAE architecture that encodes a string to a continuous, low dimensional latent space,
+then reconstructs the string from it with a decoder.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="proposal">
 <h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
 <p>The continuous latent space from the model developed by Dollar, <em>et. al.</em>, will
 be used as the input for a separate property prediction network. The original
-model was trained on SMILES strings from the ZINC (REFERENCE) dataset, but lacks
+model was trained on SMILES strings from a modified version of the ZINC <a class="reference internal" href="#zinc" id="id2"><span>[ZINC]</span></a> dataset, but lacks
 corresponding property data, so these will need to be calculated first. Then a
 fully connected network will be trained, with latent representation as the input
 and a desired property as the output. This network maybe entirely separate (e.g.,
 using a pretrained model) or trained at the same time as the VAE to optimize the
 latent space for property prediction.</p>
-</section>
-</section>
+<dl class="citation">
+<dt class="label" id="dollar"><span class="brackets"><a class="fn-backref" href="#id1">Dollar</a></span></dt>
+<dd><p>Dollar, O.; Joshi, N.; A. C. Beck, D.; Pfaendtner, J. Giving Attention to Generative VAE Models for De Novo Molecular Design, 2021. <a class="reference external" href="https://doi.org/10.26434/chemrxiv.13724629.v1">https://doi.org/10.26434/chemrxiv.13724629.v1</a>.</p>
+</dd>
+<dt class="label" id="zinc"><span class="brackets"><a class="fn-backref" href="#id2">ZINC</a></span></dt>
+<dd><p>Irwin, J. J.; Shoichet, B. K. ZINC − A Free Database of Commercially Available Compounds for Virtual Screening. Journal of Chemical Information and Modeling, 2005, 45, 177–182. <a class="reference external" href="https://doi.org/10.1021/ci049714+">https://doi.org/10.1021/ci049714+</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
 
 
           </div>
@@ -232,7 +235,7 @@ latent space for property prediction.</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2021, Isaiah Lemmon.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>

@@ -11,7 +11,10 @@ force field. Force fields parameterize the forces between atoms and are used in
 classical molecular dynamics simulations. Generating a 3D structure is essentially
 running a simulation until the forces reach a potential energy minima.
 
-INSERT IMAGE OF SMILES -> 2D -> 3D
+.. figure:: images/3d_struct.png
+    :width: 800
+
+    Corresponding 3D structure of Ciprofloxacin
 
 This step was performed using `openbabel <https://openbabel.org/wiki/Main_Page>`_,
 a Python package for computational chemistry. Specifically, the
@@ -34,7 +37,8 @@ parallel, each taking ~3 hours.
     done
 
 Out of the 1.9 million molecules, 4 were unable to successfully converge to 3D structures.
-They are shown in INSERT FILE and were removed from the training set.
+They are shown `here <https://github.com/lemmoi/cse490g1final/blob/main/data_prep/failed_smiles.txt>`_
+and were removed from the training set.
 
 **CPU hours for this step: ~70**
 
@@ -63,7 +67,7 @@ the foresight that they may be used by other researchers in the future.
 Each of the 3D structure files containing 80,000 molecules was processed in parallel. Unlike openbabel,
 these programs can take advantage of multiple cores to speed up execution. Each file was assigned
 8 cores and 16 GB of RAM on the `University of Washington HYAK cluster <https://uwrc.github.io/systems>`_
-and took approximately 10 hours to complete. The code to do this processing can be found at INSERT LINK.
+and took approximately 10 hours to complete. The code to do this processing can be found `here <https://github.com/lemmoi/cse490g1final/blob/main/data_prep/xyz_to_morf.py>`_
 The result was a CSV file of properties for each split file.
 
 **CPU hours for this step: ~2,000**
@@ -71,5 +75,7 @@ The result was a CSV file of properties for each split file.
 Recombining Split Files
 -----------------------
 
-Finally, the individual CSV files were rejoined back together INSERT LINK as a csv file for each of the training,
+Finally, the individual CSV files were `rejoined back together <https://github.com/lemmoi/cse490g1final/blob/main/data_prep/recombine.py>`_
+as a csv file for each of the training,
 development, and test sets. All files are available at INSERT LINK
+
