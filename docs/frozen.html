@@ -115,6 +115,8 @@
                 
                   <li class="toctree-l2"><a href="#xtb-lumo-revisited" class="reference internal">XTB LUMO (Revisited)</a></li>
                 
+                  <li class="toctree-l2"><a href="#demo" class="reference internal">Demo</a></li>
+                
               </ul>
             
           </li>
@@ -162,6 +164,7 @@
             
   <div class="section" id="training-with-a-frozen-vae">
 <h1>Training With a Frozen VAE<a class="headerlink" href="#training-with-a-frozen-vae" title="Permalink to this headline">¶</a></h1>
+<p><strong>See this section on Github</strong> <a class="reference external" href="https://github.com/lemmoi/cse490g1final/tree/main/frozen">here</a></p>
 <p>Since training the VAE and prediction network at the same time was not
 successful for complex electronic properties like LUMO, the next idea
 was to freeze a well-trained VAE and train the prediction network separately.
@@ -181,9 +184,9 @@ was performed for 70 epochs with a batch size of 128, the Adam optimizer with de
 parameters, a starting learning rate of 0.001, and Pytorch’s dynamic learning rate
 scheduler <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html">ReduceLROnPlateau</a>
 based on the test set loss.</p>
-<div class="figure align-default" id="id1">
+<div class="figure align-default" id="id2">
 <img alt="_images/frozen.png" src="_images/frozen.png" />
-<p class="caption"><span class="caption-text">Architecture for training property prediction with frozen latent spaces.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Architecture for training property prediction with frozen latent spaces.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>For each below property, three data normalization schemes were trialed</p>
 <ul class="simple">
@@ -199,20 +202,20 @@ solely structure. Since ZINC is composed of small drug like molecules,
 there aren’t many conformers that sterically hinder solvent access, so
 this should be roughly proportional to the size of the structure.</p>
 <p>Below is the distribution of SASA in the training data.</p>
-<div class="figure align-default" id="id2">
-<img alt="_images/sasa_area_dist.svg" src="_images/sasa_area_dist.svg" /><p class="caption"><span class="caption-text">Distribution of SASA in the training data.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<div class="figure align-default" id="id3">
+<img alt="_images/sasa_area_dist.svg" src="_images/sasa_area_dist.svg" /><p class="caption"><span class="caption-text">Distribution of SASA in the training data.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The below plots show the normalized training and testing loss for each
 normalization scheme on the left. The areas where steep drops can be
 seen are where the learning rate scheduler reduced the learning rate
 by a factor of 10. In order to compare the three schemes, the test
 loss for each was denormalized and is shown in the larger plot.</p>
-<div class="figure align-default" id="id3">
+<div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="_images/sasa_area.svg"><img alt="_images/sasa_area.svg" src="_images/sasa_area.svg" width="900" /></a>
 <p class="caption"><span class="caption-text">Left plots: SASA training and testing loss for each normalization scheme,
 with loss dependent on the scheme. Right plot: testing loss denormalized
 for each scheme so they can be directly compared. The black dot represents
-the best model.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+the best model.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <p>Here we can see that no normalization scheme performed best, and ended
 with an average loss of around 140. Since this is L2 loss, this is a
@@ -224,10 +227,10 @@ x-axis is the true value, and on the y-axis is the predicted. If our model
 was perfect, the scatterplot would fall exactly on on the <span class="math notranslate nohighlight">\(y=x\)</span> line.
 It’s not perfect, but it clearly follows a good correlation (training <span class="math notranslate nohighlight">\(r^2 = 0.725\)</span>,
 testing <span class="math notranslate nohighlight">\(r^2 = 0.782\)</span>).</p>
-<div class="figure align-default" id="id4">
+<div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="_images/sasa_area_pred.png"><img alt="_images/sasa_area_pred.png" src="_images/sasa_area_pred.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Actual SASA values vs Predicted SASA values. Perfect prediction falls on the
-black line.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+black line.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>An interesting note is the tail in the training data towards <span class="math notranslate nohighlight">\(300 \mathrm{A}^2\)</span>.
 <strong>The train/test split was originally done by ensuring the same distribution of number
@@ -242,23 +245,23 @@ from structural information. Now we begin examining properties that would
 normally require quantum mechanical calculations. The same pipeline we performed
 for SASA is repeated here for <span class="math notranslate nohighlight">\(P_{int}\)</span>, as calculated with D4. Below is
 the distribution of the training data.</p>
-<div class="figure align-default" id="id5">
-<img alt="_images/d4_disp_pint_dist.svg" src="_images/d4_disp_pint_dist.svg" /><p class="caption"><span class="caption-text">Distribution of <span class="math notranslate nohighlight">\(P_{int}\)</span> in the training data.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<div class="figure align-default" id="id6">
+<img alt="_images/d4_disp_pint_dist.svg" src="_images/d4_disp_pint_dist.svg" /><p class="caption"><span class="caption-text">Distribution of <span class="math notranslate nohighlight">\(P_{int}\)</span> in the training data.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 <p>Again, the plots with the three normalization schemes.</p>
-<div class="figure align-default" id="id6">
+<div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="_images/d4_disp.svg"><img alt="_images/d4_disp.svg" src="_images/d4_disp.svg" width="900" /></a>
 <p class="caption"><span class="caption-text">Left plots: <span class="math notranslate nohighlight">\(P_{int}\)</span> training and testing loss for each normalization scheme,
 with loss dependent on the scheme. Right plot: testing loss denormalized
 for each scheme so they can be directly compared. The black dot represents
-the best model.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+the best model.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <p>This time, bringing the labels to a standard normal performed best, though marginally.
 Using the best model, we plot the actual vs predicted values.</p>
-<div class="figure align-default" id="id7">
+<div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="_images/d4_disp_pint_pred.png"><img alt="_images/d4_disp_pint_pred.png" src="_images/d4_disp_pint_pred.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Actual <span class="math notranslate nohighlight">\(P_{int}\)</span> values vs Predicted <span class="math notranslate nohighlight">\(P_{int}\)</span> values. Perfect prediction falls on the
-black line.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+black line.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 <p>This has fairly similar performance to SASA, with training <span class="math notranslate nohighlight">\(r^2 = 0.746\)</span> and testing <span class="math notranslate nohighlight">\(r^2 = 0.761\)</span>.
 Again, wee see additional spread of the training data over the test data.
@@ -272,12 +275,12 @@ based on what the VAE learned for reconstruction.</p>
 prediction from scratch, both suffered. Will this perform better?</p>
 <p>We’ve already covered the distribution of the training data in <a class="reference internal" href="initial_training.html#xtb-lumo-dist"><span class="std std-ref">the first attempt.</span></a>
 Here are the plots of the three normalization schemes.</p>
-<div class="figure align-default" id="id8">
+<div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="_images/xtb_lumo.svg"><img alt="_images/xtb_lumo.svg" src="_images/xtb_lumo.svg" width="900" /></a>
 <p class="caption"><span class="caption-text">Left plots: LUMO training and testing loss for each normalization scheme,
 with loss dependent on the scheme. Right plot: testing loss denormalized
 for each scheme so they can be directly compared. The black dot represents
-the best model.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+the best model.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <p>Wow, this does much better! Standard normalization works best again, but had
 some overfitting the training data towards the end, and the best model was at
@@ -288,10 +291,10 @@ since it also used the standard normal scheme. That had a training loss of aroun
 while this achieves below 0.25, a 50% improvement. This validates our idea that
 a good embedded representation was never achieved when training both at the same time.</p>
 <p>Lastly, the actual vs predicted values of the final model.</p>
-<div class="figure align-default" id="id9">
+<div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="_images/xtb_lumo_pred.png"><img alt="_images/xtb_lumo_pred.png" src="_images/xtb_lumo_pred.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Actual LUMO values vs Predicted LUMO values. Perfect prediction falls on the
-black line.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+black line.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 <p>This has worse predictions (training <span class="math notranslate nohighlight">\(r^2 = 0.646\)</span>,
 testing <span class="math notranslate nohighlight">\(r^2 = 0.688\)</span>), though we expected LUMO to be more difficult to predict
@@ -303,6 +306,14 @@ the training data has much more variation than the testing data.</p>
 <p>Another interesting feature is the model predicting such a wide range for the values near
 -0.14eV. This seems to be the limit of what this prediction network can learn from embeddings
 that were only trained for reconstruction, which leads into our next steps.</p>
+</div>
+<div class="section" id="demo">
+<h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
+<p>You can see a demo notebook of the frozen latent space training <a class="reference external" href="https://github.com/lemmoi/cse490g1final/blob/main/demo/demo.ipynb">here</a>,
+with all the specific requirements of my machine removed.
+Note that it uses the test split for both training and test due to file size
+limits on github (and lack of me having a stable place to put everything else).
+It also requires <code class="code docutils literal notranslate"><span class="pre">zstd</span></code> to be installed.</p>
 </div>
 </div>
 

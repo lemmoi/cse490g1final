@@ -161,6 +161,7 @@
             
   <div class="section" id="data-preparation">
 <h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
+<p><strong>See this section on Github</strong> <a class="reference external" href="https://github.com/lemmoi/cse490g1final/tree/main/data_prep">here</a></p>
 <div class="section" id="generating-3d-structures">
 <h2>Generating 3D Structures<a class="headerlink" href="#generating-3d-structures" title="Permalink to this headline">¶</a></h2>
 <p>SMILES strings only encode the topology of a molecule, i.e. its atoms and the
@@ -170,9 +171,9 @@ DFT. Therefore, the first step is generating these 3D structures using a classic
 force field. Force fields parameterize the forces between atoms and are used in
 classical molecular dynamics simulations. Generating a 3D structure is essentially
 running a simulation until the forces reach a potential energy minima.</p>
-<div class="figure align-default" id="id2">
+<div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="_images/3d_struct.png"><img alt="_images/3d_struct.png" src="_images/3d_struct.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-text">Corresponding 3D structure of Ciprofloxacin</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Corresponding 3D structure of Ciprofloxacin</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>This step was performed using <a class="reference external" href="https://openbabel.org/wiki/Main_Page">openbabel</a>,
 a Python package for computational chemistry. Specifically, the

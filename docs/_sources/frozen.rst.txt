@@ -1,6 +1,8 @@
 Training With a Frozen VAE
 ==========================
 
+**See this section on Github** `here <https://github.com/lemmoi/cse490g1final/tree/main/frozen>`_
+
 Since training the VAE and prediction network at the same time was not
 successful for complex electronic properties like LUMO, the next idea
 was to freeze a well-trained VAE and train the prediction network separately.
@@ -171,3 +173,13 @@ the training data has much more variation than the testing data.
 Another interesting feature is the model predicting such a wide range for the values near
 -0.14eV. This seems to be the limit of what this prediction network can learn from embeddings
 that were only trained for reconstruction, which leads into our next steps.
+
+
+Demo
+^^^^
+
+You can see a demo notebook of the frozen latent space training `here <https://github.com/lemmoi/cse490g1final/blob/main/demo/demo.ipynb>`_,
+with all the specific requirements of my machine removed.
+Note that it uses the test split for both training and test due to file size
+limits on github (and lack of me having a stable place to put everything else).
+It also requires :code:`zstd` to be installed.

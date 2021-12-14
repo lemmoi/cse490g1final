@@ -1,6 +1,8 @@
 Data Preparation
 ================
 
+**See this section on Github** `here <https://github.com/lemmoi/cse490g1final/tree/main/data_prep>`_
+
 Generating 3D Structures
 ------------------------
 SMILES strings only encode the topology of a molecule, i.e. its atoms and the
